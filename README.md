@@ -105,3 +105,6 @@ A **modular dashboard web app** where students add predefined widgets (Notes, Te
 
 ## 📝 Scope Note
 Keep MVP focused. Advanced features (AI, Google Calendar sync, custom widgets) come only **after** core widgets are stable.
+
+---
+Samuel Svoboda IT3 SŠPU 
