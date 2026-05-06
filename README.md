@@ -1,4 +1,4 @@
-# 🎓 Student Dashboard App — Planning Doc
+# 🎓 Student Dashboard App
 
 ## 🌍 Problem
 Students use too many disconnected tools (notes, tests, calendars, tasks). They need **one place** to plan, study, and track progress — with widgets that can **talk to each other**.
