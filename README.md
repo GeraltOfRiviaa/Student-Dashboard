@@ -27,6 +27,7 @@ A **modular dashboard web app** where students add predefined widgets (Notes, Te
 ---
 
 ## 🧱 Architecture / Stack
+To be changed!!!
 
 ### 🎨 Frontend
 - ⚛️ **React** (widget components)
@@ -38,7 +39,7 @@ A **modular dashboard web app** where students add predefined widgets (Notes, Te
 - 🟢 **Node.js + Express**
 - 🐘 **PostgreSQL**
 - 🔁 REST API between frontend and backend
-
+Maybe Python with FastAPI
 ---
 
 ## 🔁 Data Flow
