@@ -428,6 +428,50 @@ Table stats_fields {
 
 ---
 
+# 📚 Database Explanation
+
+## ✅ Core Tables
+- **users**: user accounts.
+- **items**: central table for all widget items (notes, tasks, events, forms, stats). Every widget entry = one `items` row.
+
+## ✅ Lookup Tables (Types)
+These tables define allowed values and make the system extensible without schema changes:
+- **item_types** (note, task, event, form, stat)
+- **relation_types** (related, reference, parent, child)
+- **task_statuses** (not_started, in_progress, done)
+- **question_types** (true_false, single_choice, multi_choice)
+- **stats_source_types** (task, form)
+- **display_types** (pie, bar, line)
+
+Add a new type by inserting a new row into the correct lookup table. The database accepts it without migrations.
+
+## ✅ Tags
+- **tags** store user-defined tags with color.
+- **item_tags** is a many-to-many table connecting tags to items.
+
+## ✅ Relations
+- **relations** links any two items. Stored as a single row (no bi-directional duplication).
+- To fetch all relations for an item, query where it appears as either `from_id` or `to_id`.
+
+## ✅ Files (Notes)
+- **files** stores uploaded files linked to note items (one file per note in v1).
+
+## ✅ Task/Event Fields
+- **task_fields** stores task-specific data (status, due date).
+- **event_fields** stores event-specific data (start/end, description).
+
+## ✅ Forms
+- **form_fields** stores form metadata.
+- **form_questions** stores question definitions (type + JSON data).
+- **form_results** stores each test attempt (answers + score).
+
+## ✅ Stats
+- **stats_fields** stores how to compute a stat, not the computed data.
+- The `config` JSON stores filters like tags, time range, or source IDs.
+- Data is computed when the Stats Viewer is opened.
+
+---
+
 # 🔒 Input Validation (Outside the Database)
 The database enforces types, lengths, and relationships, but inputs should also be validated before they reach the DB.
 
