@@ -215,4 +215,231 @@ Compact widget showing the next upcoming event or a pinned event.
 
 ---
 
+# 🗄️ Database Design (Lookup Table Version)
+The schema uses lookup tables for types (item types, question types, task statuses, etc.) so new types can be added without changing the schema. Adding a new type = insert a new row into the lookup table, then update backend/frontend logic.
+
+```dbml
+Project student_dashboard {
+  database_type: "PostgreSQL"
+}
+
+Table users {
+  id uuid [pk]
+  email varchar(254) [unique, not null]
+  password_hash varchar(255) [not null]
+  created_at timestamp [not null]
+
+  indexes {
+    (email) [unique]
+  }
+}
+
+Table item_types {
+  id uuid [pk]
+  code varchar(20) [not null, unique] // note, task, event, form, stat
+  label varchar(50) [not null]
+  is_active boolean [not null, default: true]
+}
+
+Table relation_types {
+  id uuid [pk]
+  code varchar(20) [not null, unique] // related, reference, parent, child
+  label varchar(50) [not null]
+  is_active boolean [not null, default: true]
+}
+
+Table task_statuses {
+  id uuid [pk]
+  code varchar(20) [not null, unique] // not_started, in_progress, done
+  label varchar(50) [not null]
+  is_active boolean [not null, default: true]
+}
+
+Table question_types {
+  id uuid [pk]
+  code varchar(20) [not null, unique] // true_false, single_choice, multi_choice
+  label varchar(50) [not null]
+  is_active boolean [not null, default: true]
+}
+
+Table stats_source_types {
+  id uuid [pk]
+  code varchar(20) [not null, unique] // task, form
+  label varchar(50) [not null]
+  is_active boolean [not null, default: true]
+}
+
+Table display_types {
+  id uuid [pk]
+  code varchar(20) [not null, unique] // pie, bar, line
+  label varchar(50) [not null]
+  is_active boolean [not null, default: true]
+}
+
+Table items {
+  id uuid [pk]
+  user_id uuid [not null, ref: > users.id]
+  type_id uuid [not null, ref: > item_types.id]
+  title varchar(100) [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (user_id)
+    (type_id)
+    (user_id, type_id)
+    (created_at)
+  }
+}
+
+Table tags {
+  id uuid [pk]
+  user_id uuid [not null, ref: > users.id]
+  name varchar(50) [not null]
+  color varchar(7) [not null]
+  created_at timestamp [not null]
+
+  indexes {
+    (user_id)
+    (user_id, name) [unique]
+  }
+}
+
+Table item_tags {
+  item_id uuid [not null, ref: > items.id]
+  tag_id uuid [not null, ref: > tags.id]
+
+  indexes {
+    (item_id, tag_id) [unique]
+    (tag_id)
+  }
+}
+
+Table relations {
+  id uuid [pk]
+  from_id uuid [not null, ref: > items.id]
+  to_id uuid [not null, ref: > items.id]
+  relation_type_id uuid [not null, ref: > relation_types.id]
+  created_at timestamp [not null]
+
+  indexes {
+    (from_id)
+    (to_id)
+    (from_id, to_id, relation_type_id) [unique]
+  }
+}
+
+Table files {
+  id uuid [pk]
+  item_id uuid [not null, ref: > items.id]
+  filename varchar(255) [not null]
+  path varchar(500) [not null]
+  mime_type varchar(100) [not null]
+  size int [not null]
+  created_at timestamp [not null]
+
+  indexes {
+    (item_id) [unique]
+    (mime_type)
+  }
+}
+
+Table task_fields {
+  item_id uuid [pk, ref: > items.id]
+  status_id uuid [not null, ref: > task_statuses.id]
+  due_date timestamp
+
+  indexes {
+    (status_id)
+    (due_date)
+  }
+}
+
+Table event_fields {
+  item_id uuid [pk, ref: > items.id]
+  start_at timestamp [not null]
+  end_at timestamp [not null]
+  description text
+
+  indexes {
+    (start_at)
+    (end_at)
+  }
+}
+
+Table form_fields {
+  item_id uuid [pk, ref: > items.id]
+  time_limit int
+  success_percent int
+
+  indexes {
+    (success_percent)
+  }
+}
+
+Table form_questions {
+  id uuid [pk]
+  form_id uuid [not null, ref: > form_fields.item_id]
+  type_id uuid [not null, ref: > question_types.id]
+  prompt text [not null]
+  data jsonb [not null]
+  position int [not null]
+
+  indexes {
+    (form_id)
+    (form_id, position) [unique]
+    (type_id)
+  }
+}
+
+Table form_results {
+  id uuid [pk]
+  form_id uuid [not null, ref: > form_fields.item_id]
+  user_id uuid [not null, ref: > users.id]
+  score_percent int [not null]
+  answers jsonb [not null]
+  created_at timestamp [not null]
+
+  indexes {
+    (form_id)
+    (user_id)
+    (form_id, user_id)
+    (created_at)
+  }
+}
+
+Table stats_fields {
+  item_id uuid [pk, ref: > items.id]
+  source_type_id uuid [not null, ref: > stats_source_types.id]
+  metric_type varchar(50) [not null]
+  display_type_id uuid [not null, ref: > display_types.id]
+  config jsonb
+
+  indexes {
+    (source_type_id)
+    (metric_type)
+    (display_type_id)
+  }
+}
+```
+
+---
+
+# 🔒 Input Validation (Outside the Database)
+The database enforces types, lengths, and relationships, but inputs should also be validated before they reach the DB.
+
+## ✅ General Validation Strategies
+- **Schema validation**: strict schemas for each request body; reject unknown fields.
+- **Regex validation**: enforce formats (email, HEX colors, filenames, allowed tag characters).
+- **Length limits**: cap title/tag/description/prompt sizes before insert.
+- **Enum/lookup validation**: verify type/status exists and is active.
+- **Cross‑field rules**: end date after start date, positive time limits, score in range.
+- **File checks**: MIME allowlist, size limits, filename sanitization, store with safe server‑side name.
+- **HTML/JS sanitization**: strip scripts from any user‑generated text rendered in UI.
+- **Rate limiting**: block abuse on uploads or repeated requests.
+
+These checks keep invalid or malicious data out of the system even before the database layer.
+
+---
+
 Samuel Svoboda IT3 SŠPU
