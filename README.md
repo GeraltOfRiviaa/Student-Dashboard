@@ -218,6 +218,9 @@ Compact widget showing the next upcoming event or a pinned event.
 # 🗄️ Database Design (Lookup Table Version)
 The schema uses lookup tables for types (item types, question types, task statuses, etc.) so new types can be added without changing the schema. Adding a new type = insert a new row into the lookup table, then update backend/frontend logic.
 
+<img width="1984" height="1452" alt="Student Dashboard" src="https://github.com/user-attachments/assets/a427a7f4-6708-4e0f-811e-b52371548969" />
+
+---
 ```dbml
 Project student_dashboard {
   database_type: "PostgreSQL"
