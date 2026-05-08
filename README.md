@@ -15,7 +15,16 @@ A **modular dashboard web app** where students add predefined widgets (Notes, Te
 - 👤 User accounts keep personal dashboards and data  
 
 ---
+## Visual Example (not final design)
+Made with AI
 
+<img width="1200" height="900" alt="dashboard" src="https://github.com/user-attachments/assets/920c3e35-51bd-4c0e-8a7a-961ac8e2edbe" />
+
+---
+
+<img width="1200" height="900" alt="dashboard_modal" src="https://github.com/user-attachments/assets/0e8cc4e3-694d-4db7-95f3-237ac014711d" />
+
+---
 # 🧩 Widgets (Detailed Spec)
 
 ## 📝 Notes (File‑Based Knowledge)
