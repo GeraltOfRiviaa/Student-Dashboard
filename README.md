@@ -103,7 +103,7 @@ Calendar manages academic events, deadlines, and reminders, and links events to 
 
 ## 🧪 Form
 ### Summary
-Form provides self-testing and structured input workflows, with support for table and catalog/carousel presentation modes.
+Form provides self-testing (quiz/test forms) and structured data-collection forms, with support for table and catalog/carousel presentation modes.
 
 ### Workflow
 - Form widget → table **or** catalog/carousel
