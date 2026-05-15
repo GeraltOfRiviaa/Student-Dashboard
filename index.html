@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎓 Student Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; }
+
+    .widget {
+      background: #1e1e2e;
+      border: 1px solid #313244;
+      border-radius: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .widget:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sidebar-item:hover { background: #313244; }
+    .sidebar-item.active { background: #45475a; }
+
+    .mini-calendar td, .mini-calendar th {
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      font-size: 12px;
+    }
+    .mini-calendar td.today {
+      background: #89b4fa;
+      color: #1e1e2e;
+      border-radius: 50%;
+      font-weight: 600;
+    }
+    .mini-calendar td.event {
+      color: #cba6f7;
+      font-weight: 600;
+    }
+
+    .progress-bar { border-radius: 9999px; height: 6px; background: #313244; }
+    .progress-fill { border-radius: 9999px; height: 6px; transition: width 0.6s ease; }
+
+    .note-card { border-left: 3px solid; padding-left: 10px; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1e1e2e; }
+    ::-webkit-scrollbar-thumb { background: #45475a; border-radius: 9999px; }
+
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 50;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: #1e1e2e;
+      border: 1px solid #313244;
+      border-radius: 16px;
+      width: 480px;
+      max-width: 95vw;
+      padding: 28px;
+    }
+
+    .add-widget-btn {
+      border: 2px dashed #45475a;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      color: #6c7086;
+      font-size: 14px;
+    }
+    .add-widget-btn:hover { border-color: #89b4fa; background: #313244; color: #89b4fa; }
+  </style>
+</head>
+<body class="bg-[#181825] text-[#cdd6f4] min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-56 bg-[#11111b] border-r border-[#313244] flex flex-col py-6 px-3 min-h-screen shrink-0">
+    <!-- Logo -->
+    <div class="flex items-center gap-2 px-3 mb-8">
+      <span class="text-2xl">🎓</span>
+      <span class="font-bold text-[#cdd6f4] text-lg leading-tight">Student<br/>Dashboard</span>
+    </div>
+
+    <!-- Nav -->
+    <nav class="flex flex-col gap-1 flex-1">
+      <div class="sidebar-item active text-[#cdd6f4]">
+        <span>🏠</span><span class="text-sm font-medium">Dashboard</span>
+      </div>
+      <div class="sidebar-item text-[#6c7086]">
+        <span>📝</span><span class="text-sm">Notes</span>
+      </div>
+      <div class="sidebar-item text-[#6c7086]">
+        <span>🗂️</span><span class="text-sm">Archive</span>
+      </div>
+      <div class="sidebar-item text-[#6c7086]">
+        <span>🗓️</span><span class="text-sm">Calendar</span>
+      </div>
+      <div class="sidebar-item text-[#6c7086]">
+        <span>🧪</span><span class="text-sm">Forms</span>
+      </div>
+    </nav>
+
+    <!-- User -->
+    <div class="border-t border-[#313244] pt-4 mt-4">
+      <div class="sidebar-item text-[#6c7086]">
+        <div class="w-7 h-7 rounded-full bg-[#cba6f7] flex items-center justify-center text-[#1e1e2e] text-xs font-bold">S</div>
+        <span class="text-sm">Samuel</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 overflow-auto">
+    <!-- Header -->
+    <header class="border-b border-[#313244] px-8 py-4 flex items-center justify-between sticky top-0 bg-[#181825] z-10">
+      <div>
+        <h1 class="text-xl font-semibold text-[#cdd6f4]">My Dashboard</h1>
+        <p class="text-sm text-[#6c7086]">Friday, 15 May 2026</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="openModal()" class="bg-[#89b4fa] text-[#1e1e2e] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#74c7ec] transition-colors flex items-center gap-2">
+          <span>+</span> Add Widget
+        </button>
+        <button class="w-9 h-9 rounded-full bg-[#313244] flex items-center justify-center text-lg hover:bg-[#45475a] transition-colors">⚙️</button>
+      </div>
+    </header>
+
+    <!-- Dashboard Grid -->
+    <div class="p-8 grid grid-cols-12 gap-5">
+
+      <!-- Notes Widget (col-span-4) -->
+      <div class="col-span-4 widget p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span>📝</span>
+            <span class="font-semibold text-sm">Notes</span>
+          </div>
+          <span class="tag text-[#89b4fa] bg-[#89b4fa]/10">4 notes</span>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="note-card border-[#cba6f7]">
+            <p class="text-sm font-medium text-[#cdd6f4]">Math — Derivatives</p>
+            <p class="text-xs text-[#6c7086] mt-0.5">Chain rule, product rule, quotient rule...</p>
+            <div class="flex gap-1 mt-1">
+              <span class="tag text-[#cba6f7] bg-[#cba6f7]/10">math</span>
+              <span class="tag text-[#a6e3a1] bg-[#a6e3a1]/10">exam</span>
+            </div>
+          </div>
+          <div class="note-card border-[#89b4fa]">
+            <p class="text-sm font-medium text-[#cdd6f4]">IT — REST API Design</p>
+            <p class="text-xs text-[#6c7086] mt-0.5">HTTP methods, status codes, OpenAPI...</p>
+            <div class="flex gap-1 mt-1">
+              <span class="tag text-[#89b4fa] bg-[#89b4fa]/10">IT</span>
+              <span class="tag text-[#f38ba8] bg-[#f38ba8]/10">project</span>
+            </div>
+          </div>
+          <div class="note-card border-[#a6e3a1]">
+            <p class="text-sm font-medium text-[#cdd6f4]">History — WWI Summary</p>
+            <p class="text-xs text-[#6c7086] mt-0.5">Causes, key events, 1914–1918...</p>
+            <div class="flex gap-1 mt-1">
+              <span class="tag text-[#a6e3a1] bg-[#a6e3a1]/10">history</span>
+            </div>
+          </div>
+          <div class="note-card border-[#fab387]">
+            <p class="text-sm font-medium text-[#cdd6f4]">English — Essay Outline</p>
+            <p class="text-xs text-[#6c7086] mt-0.5">Introduction, body paragraphs, conclusion...</p>
+            <div class="flex gap-1 mt-1">
+              <span class="tag text-[#fab387] bg-[#fab387]/10">english</span>
+              <span class="tag text-[#f38ba8] bg-[#f38ba8]/10">deadline</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar Widget (col-span-4) -->
+      <div class="col-span-4 widget p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span>🗓️</span>
+            <span class="font-semibold text-sm">Calendar</span>
+          </div>
+          <span class="text-xs text-[#6c7086] font-medium">May 2026</span>
+        </div>
+        <!-- Mini Calendar -->
+        <table class="mini-calendar w-full mb-4">
+          <thead>
+            <tr class="text-[#6c7086]">
+              <th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th><th>Su</th>
+            </tr>
+          </thead>
+          <tbody class="text-[#cdd6f4]">
+            <tr>
+              <td></td><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td>
+            </tr>
+            <tr>
+              <td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+            </tr>
+            <tr>
+              <td>11</td><td>12</td><td>13</td><td>14</td><td class="today">15</td><td class="event">16</td><td>17</td>
+            </tr>
+            <tr>
+              <td>18</td><td class="event">19</td><td>20</td><td>21</td><td>22</td><td>23</td><td class="event">24</td>
+            </tr>
+            <tr>
+              <td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Upcoming Events -->
+        <div class="flex flex-col gap-2">
+          <p class="text-xs font-semibold text-[#6c7086] uppercase tracking-wider mb-1">Upcoming</p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded bg-[#f38ba8]/15 flex items-center justify-center text-[#f38ba8] text-xs font-bold shrink-0">16</div>
+            <div>
+              <p class="text-sm font-medium text-[#cdd6f4]">Math Test — Derivatives</p>
+              <p class="text-xs text-[#6c7086]">09:00 · Room 204</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded bg-[#fab387]/15 flex items-center justify-center text-[#fab387] text-xs font-bold shrink-0">19</div>
+            <div>
+              <p class="text-sm font-medium text-[#cdd6f4]">English Essay Due</p>
+              <p class="text-xs text-[#6c7086]">23:59 · Submit online</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded bg-[#89b4fa]/15 flex items-center justify-center text-[#89b4fa] text-xs font-bold shrink-0">24</div>
+            <div>
+              <p class="text-sm font-medium text-[#cdd6f4]">IT Project Presentation</p>
+              <p class="text-xs text-[#6c7086]">14:00 · Lab 3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress / Stats Widget (col-span-4) -->
+      <div class="col-span-4 widget p-5">
+        <div class="flex items-center gap-2 mb-4">
+          <span>📊</span>
+          <span class="font-semibold text-sm">Progress</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-[#cdd6f4]">Math</span>
+              <span class="text-[#cba6f7]">78%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill bg-[#cba6f7]" style="width:78%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-[#cdd6f4]">IT</span>
+              <span class="text-[#89b4fa]">91%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill bg-[#89b4fa]" style="width:91%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-[#cdd6f4]">History</span>
+              <span class="text-[#a6e3a1]">64%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill bg-[#a6e3a1]" style="width:64%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-[#cdd6f4]">English</span>
+              <span class="text-[#fab387]">55%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill bg-[#fab387]" style="width:55%"></div></div>
+          </div>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="grid grid-cols-3 gap-2 mt-6">
+          <div class="bg-[#313244] rounded-lg p-3 text-center">
+            <p class="text-xl font-bold text-[#cba6f7]">4</p>
+            <p class="text-xs text-[#6c7086] mt-0.5">Notes</p>
+          </div>
+          <div class="bg-[#313244] rounded-lg p-3 text-center">
+            <p class="text-xl font-bold text-[#89b4fa]">3</p>
+            <p class="text-xs text-[#6c7086] mt-0.5">Events</p>
+          </div>
+          <div class="bg-[#313244] rounded-lg p-3 text-center">
+            <p class="text-xl font-bold text-[#a6e3a1]">7</p>
+            <p class="text-xs text-[#6c7086] mt-0.5">Tasks</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Archive Widget (col-span-5) -->
+      <div class="col-span-5 widget p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span>🗂️</span>
+            <span class="font-semibold text-sm">Archive</span>
+          </div>
+          <span class="tag text-[#a6e3a1] bg-[#a6e3a1]/10">5 files</span>
+        </div>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-[#6c7086] text-xs uppercase tracking-wider">
+              <th class="text-left pb-2 font-medium">File</th>
+              <th class="text-left pb-2 font-medium">Tag</th>
+              <th class="text-left pb-2 font-medium">Size</th>
+              <th class="text-left pb-2 font-medium">Date</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#313244]">
+            <tr class="hover:bg-[#313244]/40 transition-colors">
+              <td class="py-2 pr-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">📄</span>
+                  <span class="text-[#cdd6f4] text-xs truncate max-w-[110px]">math_chapter5.pdf</span>
+                </div>
+              </td>
+              <td class="py-2 pr-3"><span class="tag text-[#cba6f7] bg-[#cba6f7]/10">math</span></td>
+              <td class="py-2 pr-3 text-xs text-[#6c7086]">2.3 MB</td>
+              <td class="py-2 text-xs text-[#6c7086]">May 10</td>
+            </tr>
+            <tr class="hover:bg-[#313244]/40 transition-colors">
+              <td class="py-2 pr-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🖼️</span>
+                  <span class="text-[#cdd6f4] text-xs truncate max-w-[110px]">ww1_map.png</span>
+                </div>
+              </td>
+              <td class="py-2 pr-3"><span class="tag text-[#a6e3a1] bg-[#a6e3a1]/10">history</span></td>
+              <td class="py-2 pr-3 text-xs text-[#6c7086]">1.1 MB</td>
+              <td class="py-2 text-xs text-[#6c7086]">May 8</td>
+            </tr>
+            <tr class="hover:bg-[#313244]/40 transition-colors">
+              <td class="py-2 pr-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">📄</span>
+                  <span class="text-[#cdd6f4] text-xs truncate max-w-[110px]">api_design.pdf</span>
+                </div>
+              </td>
+              <td class="py-2 pr-3"><span class="tag text-[#89b4fa] bg-[#89b4fa]/10">IT</span></td>
+              <td class="py-2 pr-3 text-xs text-[#6c7086]">890 KB</td>
+              <td class="py-2 text-xs text-[#6c7086]">May 5</td>
+            </tr>
+            <tr class="hover:bg-[#313244]/40 transition-colors">
+              <td class="py-2 pr-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">📝</span>
+                  <span class="text-[#cdd6f4] text-xs truncate max-w-[110px]">essay_draft.docx</span>
+                </div>
+              </td>
+              <td class="py-2 pr-3"><span class="tag text-[#fab387] bg-[#fab387]/10">english</span></td>
+              <td class="py-2 pr-3 text-xs text-[#6c7086]">44 KB</td>
+              <td class="py-2 text-xs text-[#6c7086]">May 12</td>
+            </tr>
+            <tr class="hover:bg-[#313244]/40 transition-colors">
+              <td class="py-2 pr-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">📊</span>
+                  <span class="text-[#cdd6f4] text-xs truncate max-w-[110px]">grades_2026.xlsx</span>
+                </div>
+              </td>
+              <td class="py-2 pr-3"><span class="tag text-[#f38ba8] bg-[#f38ba8]/10">grades</span></td>
+              <td class="py-2 pr-3 text-xs text-[#6c7086]">120 KB</td>
+              <td class="py-2 text-xs text-[#6c7086]">May 1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Forms / Quiz Widget (col-span-4) -->
+      <div class="col-span-4 widget p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span>🧪</span>
+            <span class="font-semibold text-sm">Forms &amp; Quizzes</span>
+          </div>
+          <span class="tag text-[#f38ba8] bg-[#f38ba8]/10">3 active</span>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="bg-[#313244] rounded-lg p-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-sm font-medium text-[#cdd6f4]">Derivatives Quiz</p>
+                <p class="text-xs text-[#6c7086] mt-0.5">10 questions · Last score: 8/10</p>
+                <div class="flex gap-1 mt-1">
+                  <span class="tag text-[#cba6f7] bg-[#cba6f7]/10">math</span>
+                  <span class="tag text-[#a6e3a1] bg-[#a6e3a1]/10">exam</span>
+                </div>
+              </div>
+              <button class="text-xs bg-[#89b4fa] text-[#1e1e2e] px-2 py-1 rounded font-semibold hover:bg-[#74c7ec] transition-colors shrink-0">Start</button>
+            </div>
+            <div class="mt-2">
+              <div class="flex justify-between text-xs mb-1 text-[#6c7086]">
+                <span>Best run</span><span>80%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill bg-[#cba6f7]" style="width:80%"></div></div>
+            </div>
+          </div>
+          <div class="bg-[#313244] rounded-lg p-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-sm font-medium text-[#cdd6f4]">WWI Key Events</p>
+                <p class="text-xs text-[#6c7086] mt-0.5">15 questions · Not taken yet</p>
+                <div class="flex gap-1 mt-1">
+                  <span class="tag text-[#a6e3a1] bg-[#a6e3a1]/10">history</span>
+                </div>
+              </div>
+              <button class="text-xs bg-[#89b4fa] text-[#1e1e2e] px-2 py-1 rounded font-semibold hover:bg-[#74c7ec] transition-colors shrink-0">Start</button>
+            </div>
+            <div class="mt-2">
+              <div class="flex justify-between text-xs mb-1 text-[#6c7086]">
+                <span>Best run</span><span>—</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill bg-[#a6e3a1]" style="width:0%"></div></div>
+            </div>
+          </div>
+          <div class="bg-[#313244] rounded-lg p-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-sm font-medium text-[#cdd6f4]">REST API Concepts</p>
+                <p class="text-xs text-[#6c7086] mt-0.5">8 questions · Last score: 7/8</p>
+                <div class="flex gap-1 mt-1">
+                  <span class="tag text-[#89b4fa] bg-[#89b4fa]/10">IT</span>
+                </div>
+              </div>
+              <button class="text-xs bg-[#89b4fa] text-[#1e1e2e] px-2 py-1 rounded font-semibold hover:bg-[#74c7ec] transition-colors shrink-0">Start</button>
+            </div>
+            <div class="mt-2">
+              <div class="flex justify-between text-xs mb-1 text-[#6c7086]">
+                <span>Best run</span><span>88%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill bg-[#89b4fa]" style="width:88%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Widget placeholder -->
+      <div class="col-span-3 add-widget-btn min-h-[120px]" onclick="openModal()">
+        <span class="text-2xl">+</span>
+        <span>Add Widget</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Add Widget Modal -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-semibold text-[#cdd6f4]">Add a Widget</h2>
+        <button onclick="closeModal()" class="text-[#6c7086] hover:text-[#cdd6f4] text-xl leading-none">&times;</button>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <button class="bg-[#313244] hover:bg-[#45475a] transition-colors rounded-xl p-4 text-left">
+          <div class="text-2xl mb-2">📝</div>
+          <p class="text-sm font-semibold text-[#cdd6f4]">Notes</p>
+          <p class="text-xs text-[#6c7086] mt-0.5">Markdown notes &amp; catalog</p>
+        </button>
+        <button class="bg-[#313244] hover:bg-[#45475a] transition-colors rounded-xl p-4 text-left">
+          <div class="text-2xl mb-2">🗂️</div>
+          <p class="text-sm font-semibold text-[#cdd6f4]">Archive</p>
+          <p class="text-xs text-[#6c7086] mt-0.5">File manager &amp; attachments</p>
+        </button>
+        <button class="bg-[#313244] hover:bg-[#45475a] transition-colors rounded-xl p-4 text-left">
+          <div class="text-2xl mb-2">🗓️</div>
+          <p class="text-sm font-semibold text-[#cdd6f4]">Calendar</p>
+          <p class="text-xs text-[#6c7086] mt-0.5">Events, deadlines &amp; reminders</p>
+        </button>
+        <button class="bg-[#313244] hover:bg-[#45475a] transition-colors rounded-xl p-4 text-left">
+          <div class="text-2xl mb-2">🧪</div>
+          <p class="text-sm font-semibold text-[#cdd6f4]">Form / Quiz</p>
+          <p class="text-xs text-[#6c7086] mt-0.5">Self-testing &amp; data forms</p>
+        </button>
+        <button class="bg-[#313244] hover:bg-[#45475a] transition-colors rounded-xl p-4 text-left">
+          <div class="text-2xl mb-2">📊</div>
+          <p class="text-sm font-semibold text-[#cdd6f4]">Progress</p>
+          <p class="text-xs text-[#6c7086] mt-0.5">Stats &amp; performance graphs</p>
+        </button>
+        <button class="bg-[#313244] hover:bg-[#45475a] transition-colors rounded-xl p-4 text-left opacity-50 cursor-not-allowed">
+          <div class="text-2xl mb-2">🔗</div>
+          <p class="text-sm font-semibold text-[#cdd6f4]">Relations</p>
+          <p class="text-xs text-[#6c7086] mt-0.5">Coming soon</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById('modal').classList.add('open');
+    }
+    function closeModal(e) {
+      document.getElementById('modal').classList.remove('open');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
