@@ -30,7 +30,7 @@ A **modular dashboard web app** where students add predefined widgets (Note, Arc
 ## ✨ Core Concept
 - 🧩 Dashboard with draggable, resizable widgets  
 - 🧱 Each widget is a reusable component  
-- 🔗 Widgets connect via **tags + relations**  
+
 - 👤 User accounts keep personal dashboards and data  
 
 ---
