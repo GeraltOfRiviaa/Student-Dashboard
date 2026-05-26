@@ -87,7 +87,7 @@ Archive is the file manager widget for storing files and connecting them to note
 Calendar manages academic events, deadlines, and reminders, and links events to notes/forms when needed.
 
 ### Workflow
-- Calendar widget → month / day / event views
+- Calendar widget → month / week / day
 - Calendar widget → event catalog/carousel
 - Event item → open and edit event details
 
