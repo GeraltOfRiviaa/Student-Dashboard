@@ -114,7 +114,8 @@ Form provides self-testing (quiz/test forms) and structured data-collection form
 ### Data Stored
 - Title
 - Form fields/questions
-- Responses/results history
+- Responses
+- Results history
 - Tags
 - Linked note/calendar IDs
 - Created at / Updated at
