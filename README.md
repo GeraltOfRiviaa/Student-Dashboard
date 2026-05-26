@@ -96,6 +96,7 @@ Calendar manages academic events, deadlines, and reminders, and links events to 
 - Start / End time
 - Description
 - Tags
+- Reminders
 - Linked note/form IDs
 - Created at / Updated at
 
