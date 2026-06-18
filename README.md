@@ -1,5 +1,8 @@
 # 🎓 Student Dashboard App
 
+## Updates
+Citations and progress files have been added. Now my work includes user workflow and two simple wireframes. See **citations.md** and **progress.md**
+
 ## Story Time (skip for shorter summary)
 As a student who always tried to enhance my study habits I always looked at the internet for the ✨**perfect**✨ study app. For some time I was okay with having simply my handwritten notes in my drawer and testing myself by hiding the words with my hand. I was doing this till I felt prepared for the test ahead. It's nice and simple, but with age came more work. Harder and longer assignments, tests and I needed to *upgrade*. I came upon [RemNote](https://www.remnote.com/). 
 
