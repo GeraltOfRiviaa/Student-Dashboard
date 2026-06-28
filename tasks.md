@@ -19,7 +19,7 @@ Tasks are ordered by dependency; complete phases sequentially unless noted other
 
 1. Re-read the README fully — confirm every widget's "Data Stored" section is final before writing any code.✅
 2. Sketch the dashboard wireframe on paper: grid layout, header, widget-adding flow.✅
-3. Sketch all four widgets (Note, Archive, Calendar, Form) in both compact and expanded states.
+3. Sketch all views for all widgets on paper.✅
 4. Sketch catalog/carousel view and table view (shared UI patterns across multiple widgets).✅
 5. Define the color system: background, surface, border, text, accent, error — write hex values.✅
 6. Decide how the first tag's color drives the widget header accent color — mock it on paper.
