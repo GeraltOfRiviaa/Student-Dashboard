@@ -70,7 +70,7 @@ Notes are plaintext/markdown documents editable directly in the app. The Note wi
 
 ## 🗂️ Archive
 ### Summary
-Archive is the file manager widget for storing files and connecting them to notes.
+Archive is the file manager widget for storing files and connecting them to notes. Supported files will be JPEG, PNG, PDF for now
 
 ### Workflow
 - Archive widget → archive table/gallery
