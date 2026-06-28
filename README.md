@@ -51,10 +51,10 @@ Made with AI
 
 ## 📝 Note
 ### Summary
-Notes are plaintext/markdown documents editable directly in the app. The Note widget can be used as a single note widget or as a catalog/carousel view.
+Notes are plaintext/markdown documents editable directly in the app. The Note widget can be used as a single note widget or as a catalog view.
 
 ### Workflow
-- Note widget → single note view **or** note catalog/carousel
+- Note widget → single note view **or** note catalog
 - Note view → edit markdown content + metadata
 - Note view → attach/select files from Archive
 
@@ -64,6 +64,7 @@ Notes are plaintext/markdown documents editable directly in the app. The Note wi
 - Tags
 - Linked archive file IDs
 - Created at / Updated at
+- User ID
 
 ---
 
@@ -82,17 +83,28 @@ Archive is the file manager widget for storing files and connecting them to note
 - Tags
 - Linked note IDs
 - Created at / Updated at
+- User ID
 
 ---
 
 ## 🗓️ Calendar
 ### Summary
-Calendar manages academic events, deadlines, and reminders, and links events to notes/forms when needed.
+Calendar is a widget in which you can display events.
 
 ### Workflow
 - Calendar widget → month / week / day
-- Calendar widget → event catalog/carousel
+- Calendar widget → event catalog
 - Event item → open and edit event details
+
+### Data Stored
+- Title
+- Created At
+- User ID
+
+---
+## Event 2️⃣
+### Summary
+Events serve as glorified reminders, which funnely enough can have reminders ahead of time, so you don't forget about them. Their speciality is that they support links         to notes, forms and files in the archive. Imagine you put a single view event on a dashboard; few days later you open the app and instead of searching for related              tests and notes manualy you just open the event and go straight to the material.
 
 ### Data Stored
 - Title
@@ -100,17 +112,17 @@ Calendar manages academic events, deadlines, and reminders, and links events to 
 - Description
 - Tags
 - Reminders
-- Linked note/form IDs
+- Linked note/form/files IDs
 - Created at / Updated at
+- - User ID
 
 ---
-
 ## 🧪 Form
 ### Summary
-Form provides self-testing (quiz/test forms) and structured data-collection forms, with support for table and catalog/carousel presentation modes.
+Form provides self-testing (quiz/test forms) and structured data-collection forms, with support for table and catalog presentation modes.
 
 ### Workflow
-- Form widget → table **or** catalog/carousel
+- Form widget → table **or** catalog
 - Form item → open form, fill/submit, view result/history
 - Form item → link to related notes/calendar events
 
@@ -122,6 +134,7 @@ Form provides self-testing (quiz/test forms) and structured data-collection form
 - Tags
 - Linked note/calendar IDs
 - Created at / Updated at
+- User ID
 
 ---
 
