@@ -48,21 +48,23 @@ Made with AI
 
 ---
 # 🧩 Widgets (Detailed Spec)
+All widgets support changing view and filtering by tag — see Default Actions and Filters basics in progress.md. Actions below only list what's unique to each widget.
 
 ## 📝 Note
 ### Summary
-Notes are plaintext/markdown documents editable directly in the app. The Note widget can be used as a single note widget or as a catalog view.
+Notes are plaintext/markdown documents editable directly in the app. The Note widget can be used as a single note view, catalog view, or table view.
 
-### Workflow
-- Note widget → single note view **or** note catalog
-- Note view → edit markdown content + metadata
-- Note view → attach/select files from Archive
+### Actions
+- Write markdown text with pictures, links, and basic formatting
+- Link forms and events in metadata section
+- Attach/select files from Archive
 
 ### Data Stored
 - Title
 - Markdown content
 - Tags
 - Linked archive file IDs
+- Container ID
 - Created at / Updated at
 - User ID
 
@@ -72,16 +74,16 @@ Notes are plaintext/markdown documents editable directly in the app. The Note wi
 ### Summary
 Archive is the file manager widget for storing files and connecting them to notes. Supported files will be JPEG, PNG, PDF for now
 
-### Workflow
-- Archive widget → archive table/gallery
-- Archive entry → upload/download/manage file metadata
-- Archive entry → link/unlink file to notes
+### Actions
+- Upload/download files
+- Link/unlink files to notes
 
 ### Data Stored
 - Filename
 - File reference (storage path / MIME type / size)
 - Tags
 - Linked note IDs
+- Container ID
 - Created at / Updated at
 - User ID
 
@@ -89,22 +91,12 @@ Archive is the file manager widget for storing files and connecting them to note
 
 ## 🗓️ Calendar
 ### Summary
-Calendar is a widget in which you can display events.
+Calendar is a widget in which you can display events. Events serve as glorified reminders, which funnely enough can have reminders ahead of time, so you don't forget about them. Their speciality is that they support links to notes, forms and files in the archive. Imagine you put a single view event on a dashboard; few days later you open the app and instead of searching for related tests and notes manualy you just open the event and go straight to the material.
 
-### Workflow
-- Calendar widget → month / week / day
-- Calendar widget → event catalog
-- Event item → open and edit event details
-
-### Data Stored
-- Title
-- Created At
-- User ID
-
----
-## Event 2️⃣
-### Summary
-Events serve as glorified reminders, which funnely enough can have reminders ahead of time, so you don't forget about them. Their speciality is that they support links         to notes, forms and files in the archive. Imagine you put a single view event on a dashboard; few days later you open the app and instead of searching for related              tests and notes manualy you just open the event and go straight to the material.
+### Actions
+- Open and edit event details
+- Set reminders ahead of time
+- Link notes, forms, and files to an event
 
 ### Data Stored
 - Title
@@ -113,18 +105,18 @@ Events serve as glorified reminders, which funnely enough can have reminders ahe
 - Tags
 - Reminders
 - Linked note/form/files IDs
+- Container ID
 - Created at / Updated at
-- - User ID
+- User ID
 
 ---
 ## 🧪 Form
 ### Summary
 Form provides self-testing (quiz/test forms) and structured data-collection forms, with support for table and catalog presentation modes.
 
-### Workflow
-- Form widget → table **or** catalog
-- Form item → open form, fill/submit, view result/history
-- Form item → link to related notes/calendar events
+### Actions
+- Fill/submit a form and view result/history
+- Link to related notes/calendar events
 
 ### Data Stored
 - Title
@@ -133,7 +125,21 @@ Form provides self-testing (quiz/test forms) and structured data-collection form
 - Results history
 - Tags
 - Linked note/calendar IDs
+- Container ID
 - Created at / Updated at
+- User ID
+
+---
+
+# ⚙️ Backend Structures
+**Container**
+
+Every widget (Note, Archive, Calendar, Form) is backed by a Container — the part that holds items and lives on the dashboard. The actual data (Note, Archive Item, Event, Form) is stored separately and linked back via Container ID. Type is fixed at creation and never changes.
+
+### Data Stored
+- Type (note / archive / calendar / form)
+- Title
+- Created At
 - User ID
 
 ---
@@ -158,8 +164,9 @@ Form provides self-testing (quiz/test forms) and structured data-collection form
 - **Note content is plaintext/markdown editable in app**
 - **Archive files can be linked to notes**
 - **Calendar supports month/day/event views**
-- **Note, Form, and Calendar support catalog/carousel modes**
+- **Note and Form support catalog modes**
 - **Note, Archive, and Form support table view**
+- **Container type is set at creation and immutable**
 
 ---
 
