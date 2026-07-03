@@ -17,3 +17,21 @@ To **showcase** how could some widgets look I created very simple  *wireframes* 
 <img width="1717" height="628" alt="calendar-wireframe" src="https://github.com/user-attachments/assets/a153c795-40f7-430a-a6eb-a4539cf0de2a" />
 <img width="470" height="475" alt="wf-single" src="https://github.com/user-attachments/assets/840f16b9-3634-4814-ac08-7120a716e6fa" />
 <img width="684" height="498" alt="wf-catalog" src="https://github.com/user-attachments/assets/ca51f3c5-8cb4-4f0e-a60f-136748eb9e44" />
+
+# Progress - 3.7. 2026
+## Documentation 📖
+README has been changed and now doesn't contain workflows but actions which tell the user what you can do with each widget. The way it was done before was confusing. Also made the decision to split each widget onto item and container to better fit our database.
+## User Workflow ➡️
+Workflow has been changed to fit our needs better and more actions have been added!
+<img width="1114" height="819" alt="image" src="https://github.com/user-attachments/assets/de6a20ca-277c-4566-a990-cf423d32db51" />
+<img width="704" height="893" alt="image" src="https://github.com/user-attachments/assets/b13ce203-e911-44ca-87a1-edb747c4e5f1" />
+<img width="443" height="370" alt="image" src="https://github.com/user-attachments/assets/89bce7bc-7ba0-45b4-8f0e-b07c31de70f2" />
+<img width="448" height="272" alt="image" src="https://github.com/user-attachments/assets/56f84f6b-b7d5-4476-8dfa-3fae85b96011" />
+<img width="485" height="158" alt="image" src="https://github.com/user-attachments/assets/dd185ba1-f7a9-4cb0-8f2f-ae5841f36543" />
+<img width="521" height="483" alt="image" src="https://github.com/user-attachments/assets/39221cd8-6333-4c30-9ec9-9800f7cd4431" />
+<img width="498" height="590" alt="image" src="https://github.com/user-attachments/assets/48558f10-a660-47ab-b463-991048ea264f" />
+<img width="577" height="804" alt="image" src="https://github.com/user-attachments/assets/a8d058d1-ed0a-40e0-a8e5-14ca5b03a5f5" />
+<img width="919" height="727" alt="image" src="https://github.com/user-attachments/assets/276dd1b5-99b8-4bdf-ae20-fd83c49e4d1e" />
+<img width="1213" height="963" alt="image" src="https://github.com/user-attachments/assets/96895d3e-bd0b-4e14-9b88-c1fbe8af3508" />
+
+
