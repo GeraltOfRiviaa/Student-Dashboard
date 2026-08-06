@@ -22,16 +22,15 @@ Tasks are ordered by dependency; complete phases sequentially unless noted other
 3. Sketch all views for all widgets on paper.✅
 4. Sketch catalog/carousel view and table view (shared UI patterns across multiple widgets).✅
 5. Define the color system: background, surface, border, text, accent, error — write hex values.✅
-6. Decide how the first tag's color drives the widget header accent color — mock it on paper.
-7. Pick typography: one display/heading font, one body font — configure both in Tailwind.
-8. Map out all MongoDB collections: `users`, `boards`, `widgets`, `notes`, `archive_files`, `events`, `forms`.
-9. Design each document schema — specify which fields are top-level vs nested.
-10. Decide the ObjectId reference strategy (e.g. `note.linked_archive_ids: [ObjectId, ...]`).
-11. List every API endpoint needed: method, path, purpose.
-12. Decide file storage strategy for the Archive widget: local disk, GridFS, or Cloudinary.
-13. Decide JWT storage strategy: httpOnly cookie vs localStorage — document the security tradeoff.
-14. Choose deployment targets: Vercel (frontend), Render (FastAPI), MongoDB Atlas (database).
-15. Set up a tracking board (GitHub Projects or Notion) for personal progress tracking.
+6. Pick typography: one display/heading font, one body font — configure both in Tailwind.
+7. Map out all MongoDB collections: `users`, `boards`, `widgets`, `notes`, `archive_files`, `events`, `forms`.
+8. Design each document schema — specify which fields are top-level vs nested.
+9. Decide the ObjectId reference strategy (e.g. `note.linked_archive_ids: [ObjectId, ...]`).
+10. List every API endpoint needed: method, path, purpose.
+11. Decide file storage strategy for the Archive widget: local disk, GridFS, or Cloudinary.
+12. Decide JWT storage strategy: httpOnly cookie vs localStorage — document the security tradeoff.
+13. Choose deployment targets: Vercel (frontend), Render (FastAPI), MongoDB Atlas (database).
+14. Set up a tracking board (GitHub Projects or Notion) for personal progress tracking.
 
 ---
 
