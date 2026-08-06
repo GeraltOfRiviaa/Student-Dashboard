@@ -148,7 +148,6 @@ Every widget (Note, Archive, Calendar, Form) is backed by a Container — the pa
 **Tags**
 - Used for filtering and linking  
 - Created by users  
-- First tag controls widget color  
 
 **Relations**
 - Notes ↔ Archive files  
