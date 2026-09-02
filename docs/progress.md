@@ -3,7 +3,7 @@ I've started to working on a sideproject with my techstack where I can make mist
 
 # Progress - 6.8. 2026
 I've stopped focusing on the *design* of the app and now I'm learning more about the technologies since I forgot most of what I learned
-and need to fresh up on everything. I'm planning to do a small  :sparkles: **side project** :sparkles: build with the exact techologies I'll be using in the final product to get familiar myself with everything :nail_care:. I'll probably upload it to **GitHub** :heart: to and paste the link in this document for others to see what I'm up to :+1:. So far I've watched and gained basic understanding of **Pydantic**, **FastAPI** and **MongoDB**
+and need to fresh up on everything. I'm planning to do a small  :sparkles: **side project** :sparkles: build with the exact techologies I'll be using in the final product to get familiar myself with everything :nail_care:. I'll probably upload it to :heart: **GitHub** :heart: to and paste the link in this document for others to see what I'm up to :+1:. So far I've watched and gained basic understanding of **Pydantic**, **FastAPI** and **MongoDB**
 
 
 # Progress - 3.7. 2026
