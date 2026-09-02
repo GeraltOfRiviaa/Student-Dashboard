@@ -1,4 +1,7 @@
-# Progress - 8.6. 2026
+# Progress - 6.8. 2026
+I've started to working on a sideproject with my techstack where I can make mistakes and learn from. At [this]`https://github.com/GeraltOfRiviaa/Students-Dashboard-Playground` repo you can see what I've done. My work consited mainly of watching and following tutorials. In library folder is the sideproject with it's own readme. I'm trying to get familiar with the technology so I choose something familiar and easy. As for now I want to keep it simple but later I will dabble with accounts and security to, because the same thing will be needed in the final project. 
+
+# Progress - 6.8. 2026
 I've stopped focusing on the *design* of the app and now I'm learning more about the technologies since I forgot most of what I learned
 and need to fresh up on everything. I'm planning to do a small  :sparkles: **side project** :sparkles: build with the exact techologies I'll be using in the final product to get familiar myself with everything :nail_care:. I'll probably upload it to **GitHub** :heart: to and paste the link in this document for others to see what I'm up to :+1:. So far I've watched and gained basic understanding of **Pydantic**, **FastAPI** and **MongoDB**
 

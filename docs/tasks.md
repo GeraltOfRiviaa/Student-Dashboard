@@ -3,7 +3,7 @@
 > **Project:** Student Dashboard (React + Tailwind · FastAPI · Pydantic · MongoDB)
 > **Author:** Samuel Svoboda · IT3 SŠPU
 > **Timeline:** Solo · ~6.5 months
-> **Stack:** React/Vite (frontend) · FastAPI/uvicorn (backend) · MongoDB Atlas + Motor (database) · Vercel + Render (deployment)
+> **Stack:** React/Vite (frontend) · FastAPI/uvicorn (backend) · MongoDB Atlas(database)
 
 ---
 
