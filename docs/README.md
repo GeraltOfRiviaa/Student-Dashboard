@@ -2,7 +2,7 @@
 
 
 > [!NOTE]
-> **Updates:** Citations and progress files have been added. Now my work includes user workflow and two simple wireframes. See `citations.md` and `progress.md` in the [docs](./docs) folder.
+> **Updates:** Citations and progress files have been added. Now my work includes user workflow and two simple wireframes. See `citations.md` and `progress.md` in the [docs](/docs) folder.
 
 
 ## Story Time
