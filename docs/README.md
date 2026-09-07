@@ -1,11 +1,14 @@
 # 🎓 Student Dashboard App
 
 
-## Updates 
-Citations and progress files have been added. Now my work includes user workflow and two simple wireframes. See **citations.md** and **progress.md** by going into the [docs](https://github.com/GeraltOfRiviaa/Student-Dashboard/edit/main/docs) folder.  
+> [!NOTE]
+> **Updates:** Citations and progress files have been added. Now my work includes user workflow and two simple wireframes. See `citations.md` and `progress.md` in the [docs](./docs) folder.
 
 
-## Story Time (skip for shorter summary)
+## Story Time
+> [!TIP]
+> This section is a personal backstory on why the project exists. Skip to [Problem](#-problem) for the short version.
+
 As a student who always tried to enhance my study habits I always looked at the internet for the ✨**perfect**✨ study app. For some time I was okay with having simply my handwritten notes in my drawer and testing myself by hiding the words with my hand. I was doing this till I felt prepared for the test ahead. It's nice and simple, but with age came more work. Harder and longer assignments, tests and I needed to *upgrade*. I came upon [RemNote](https://www.remnote.com/). 
 
 > Great app not only for testing yourself but also for storing, categorizing and managing knowledge. 
@@ -40,7 +43,8 @@ A **modular dashboard web app** where students add predefined widgets (Note, Arc
 
 ---
 ## Visual Example (not final design)
-Made with AI
+> [!NOTE]
+> These mockups were generated with AI to visualize the concept — they are not the final UI design.
 
 <img width="1200" height="900" alt="dashboard" src="https://github.com/user-attachments/assets/920c3e35-51bd-4c0e-8a7a-961ac8e2edbe" />
 
@@ -138,11 +142,14 @@ Form provides self-testing (quiz/test forms) and structured data-collection form
 
 Every widget (Note, Archive, Calendar, Form) is backed by a Container — the part that holds items and lives on the dashboard. The actual data (Note, Archive Item, Event, Form) is stored separately and linked back via Container ID. Type is fixed at creation and never changes.
 
+
 ### Data Stored
 - Type (note / archive / calendar / form)
 - Title
 - Created At
 - User ID
+> [!WARNING]
+> Container type is fixed at creation and cannot be changed afterward. Plan container creation accordingly.
 
 ---
 
@@ -160,6 +167,8 @@ Every widget (Note, Archive, Calendar, Form) is backed by a Container — the pa
 ---
 
 # ⚙️ Technical Decisions (Current)
+> [!IMPORTANT]
+> These are current decisions, not final ones — several are still open questions (see progress.md).
 - **One active account per session** (multi‑account switching can be added later)
 - **File uploads stored by the app** (with size limits in v1)
 - **Note content is plaintext/markdown editable in app**
@@ -198,5 +207,68 @@ Input should be validated before processing and persistence.
 These checks keep invalid or malicious data out of the system even before the database layer.
 
 ---
+# 📖 Database and API
 
+Database of my choice is MongoDB because of its non-relational database schema. To access said database I'll use FastAPI for its automatic docs documentation and ease of use.
+
+## Endpoints
+
+To gather information about widgets, update or delete them these endpoints will be used.
+
+## 👤 Users
+
+### Endpoints
+
+- `POST /users` — create user
+- `GET /users/{user_id}` — get user
+- `PATCH /users/{user_id}` — update user
+- `DELETE /users/{user_id}` — delete user
+- `POST /auth/login` — login
+
+---
+
+## ⚙️ Containers
+
+### Endpoints
+
+- `POST /containers` — create container
+- `GET /containers/{container_id}` — get one container
+- `GET /users/{user_id}/containers` — get all containers for user
+- `PATCH /containers/{container_id}` — update container (title, filterTags)
+- `DELETE /containers/{container_id}` — delete container
+- `DELETE /containers?ids=1,2,3` — bulk delete by ids
+
+---
+
+## 🧩 Widgets
+
+`{widget_type}` = notes / forms / archive / calendar-events
+
+### Endpoints
+
+- `POST /{widget_type}` — create widget
+- `GET /{widget_type}/{widget_id}` — get one widget
+- `GET /{widget_type}?user_id=` — get all of type for user
+- `GET /{widget_type}?tags=math,bio` — get all matching any tag (in group)
+- `GET /{widget_type}?tags=math,bio&match=all` — get all matching exact/all tags
+- `PATCH /{widget_type}/{widget_id}` — update widget
+- `DELETE /{widget_type}/{widget_id}` — delete widget
+- `DELETE /{widget_type}?tags=math,bio` — delete all matching any tag in group
+
+---
+
+## 🖋️ Forms
+
+### Endpoints
+
+- `POST /forms/{form_id}/responses` — submit a response
+- `GET /forms/{form_id}/responses` — get results/response history
+
+### Links
+
+- `POST /links` — create link between two items
+- `DELETE /links/{link_id}` — delete link
+- `GET /links?item_id=` — get all links for an item
+
+---
 Samuel Svoboda IT3 SŠPU
