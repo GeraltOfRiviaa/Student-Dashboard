@@ -1,10 +1,23 @@
+# Progress - 8.9. 2026
+## Tech-Stack Practice 
+
+I am actively solidifying my skills by building a library application within the Students-Dashboard-Playground repository. Currently, I am designing the home and detail views for books to properly learn responsive design with Tailwind CSS, while also practicing connecting React components to live backend data. My next major step in the playground will be implementing user accounts and authentication.
+
+## Main Project Planning 
+Referencing the Students Dashborad file, I have collaborated with AI to map out the required API endpoints and the actual database structure that will be used for the core application. While these schemas may continue to evolve, I plan to post these smaller updates regularly to showcase steady momentum. No application code has been written for the main project yet. My current focus remains entirely dedicated to tech-stack familiarization and refining the project's schema design directly.
+
+---
+
 # Progress - 6.8. 2026
 I've started to working on a sideproject with my techstack where I can make mistakes and learn from. At [this]`https://github.com/GeraltOfRiviaa/Students-Dashboard-Playground` repo you can see what I've done. My work consited mainly of watching and following tutorials. In library folder is the sideproject with it's own readme. I'm trying to get familiar with the technology so I choose something familiar and easy. As for now I want to keep it simple but later I will dabble with accounts and security to, because the same thing will be needed in the final project. 
+
+---
 
 # Progress - 6.8. 2026
 I've stopped focusing on the *design* of the app and now I'm learning more about the technologies since I forgot most of what I learned
 and need to fresh up on everything. I'm planning to do a small  :sparkles: **side project** :sparkles: build with the exact techologies I'll be using in the final product to get familiar myself with everything :nail_care:. I'll probably upload it to :heart: **GitHub** :heart: to and paste the link in this document for others to see what I'm up to :+1:. So far I've watched and gained basic understanding of **Pydantic**, **FastAPI** and **MongoDB**
 
+---
 
 # Progress - 3.7. 2026
 ## Documentation 📖
@@ -22,7 +35,7 @@ Workflow has been changed to fit our needs better and more actions have been add
 <img width="919" height="727" alt="image" src="https://github.com/user-attachments/assets/276dd1b5-99b8-4bdf-ae20-fd83c49e4d1e" />
 <img width="1213" height="963" alt="image" src="https://github.com/user-attachments/assets/96895d3e-bd0b-4e14-9b88-c1fbe8af3508" />
 
-
+---
 
 # Progress - 16.6. 2026
 ## User Workflow ➡️
