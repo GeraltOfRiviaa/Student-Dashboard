@@ -268,87 +268,88 @@ To gather information about widgets, update or delete them these endpoints will 
 ---
 
 ## 🗄️ Database Architecture
-The application utilizes a non-relational database structure managed via MongoDB[cite: 1]. To maintain high performance and prevent data synchronization issues, collections are strictly decoupled—containers only store UI layouts and filter strings, while cross-widget relationships are isolated in a dedicated links collection[cite: 1].
+The application utilizes a non-relational database structure managed via MongoDB. To maintain high performance and prevent data synchronization issues, collections are strictly decoupled—containers only store UI layouts and filter strings, while cross-widget relationships are isolated in a dedicated links collection.
 
 ### 👤 Users
-Stores authentication credentials and account settings[cite: 1].
-*   `user_id`: Unique identifier for the account[cite: 1].
-*   **email:** User login address (validated and unique)[cite: 1].
-*   **password_hash:** Securely hashed password credential[cite: 1].
-*   **created_at / updated_at:** Timestamps tracking account lifecycle[cite: 1].
+Stores authentication credentials and account settings.
+*   `user_id`: Unique identifier for the account.
+*   `email`: User login address (validated and unique).
+*   `password_hash`: Securely hashed password credential.
+*   `created_at` / `updated_at`: Timestamps tracking account lifecycle.
 
 ### ⚙️ Containers
-Lives on the dashboard and represents a saved layout space and filter view[cite: 1].
-*   **container_id:** Unique identifier for the container layout block[cite: 1].
-*   **user_id:** References the owning user account[cite: 1].
-*   **title:** Custom display label set by the user[cite: 1].
-*   **type:** Fixed widget type (note, archive, calendar, or form)[cite: 1].
-*   **filter_tags:** Array of plain tag strings used to query items onto the container[cite: 1].
-*   **layout:** Object containing position and sizing parameters { x, y, w, h }[cite: 1].
-*   **created_at / updated_at:** Creation and last-modified timestamps[cite: 1].
+Lives on the dashboard and represents a saved layout space and filter view.
+*   `container_id`: Unique identifier for the container layout block.
+*   `user_id`: References the owning user account.
+*   `title`: Custom display label set by the user.
+*   `type`: Fixed widget type (note, archive, calendar, or form).
+*   `filter_tags`: Array of plain tag strings used to query items onto the container.
+*   `layout`: Object containing position and sizing parameters { x, y, w, h }.
+*   `created_at` / `updated_at`: Creation and last-modified timestamps.
 
 ### 🏷️ Master Tags
-Acts as a global lookup dictionary for UI autocompletion, settings management, and custom badge styling[cite: 1].
-*   **tag_id:** Unique identifier for the tag entry[cite: 1].
-*   **user_id:** Isolates tags to the specific user account[cite: 1].
-*   **name:** Plain text string matching the tag used across widgets[cite: 1].
-*   **color:** Hex code value for visual UI tag badges[cite: 1].
-*   **created_at / updated_at:** Creation and last-modified timestamps[cite: 1].
+Acts as a global lookup dictionary for UI autocompletion, settings management, and custom badge styling.
+*   `tag_id`: Unique identifier for the tag entry.
+*   `user_id`: Isolates tags to the specific user account.
+*   `name`: Plain text string matching the tag used across widgets.
+*   `color`: Hex code value for visual UI tag badges.
+*   `created_at` / `updated_at`: Creation and last-modified timestamps.
 
 ### 📝 Notes
-Stores markdown documents edited directly within the dashboard[cite: 1].
-*   **note_id:** Unique identifier for the note[cite: 1].
-*   **user_id:** References the owning user[cite: 1].
-*   **title:** Plaintext note title[cite: 1].
-*   **content:** Raw Markdown text body[cite: 1].
-*   **tags:** Array of plain tag strings assigned to the note[cite: 1].
-*   **created_at / updated_at:** Creation and edit timestamps[cite: 1].
+Stores markdown documents edited directly within the dashboard.
+*   `note_id`: Unique identifier for the note.
+*   `user_id`: References the owning user.
+*   `title`: Plaintext note title.
+*   `content`: Raw Markdown text body.
+*   `tags`: Array of plain tag strings assigned to the note.
+*   `created_at` / `updated_at`: Creation and edit timestamps.
 
 ### 🗂️ Archive
-Tracks uploaded files and metadata[cite: 1].
-*   **file_id:** Unique identifier for the archive item[cite: 1].
-*   **user_id:** References the owning user[cite: 1].
-*   **filename:** Original upload file name[cite: 1].
-*   **storage_path:** Internal server path where the file is stored[cite: 1].
-*   **mime_type:** File format classification (JPEG, PNG, PDF)[cite: 1].
-*   **size:** File size in bytes[cite: 1].
-*   **tags:** Array of plain tag strings assigned to the file[cite: 1].
-*   **created_at / updated_at:** Upload and modification timestamps[cite: 1].
+Tracks uploaded files and metadata.
+*   `file_id`: Unique identifier for the archive item.
+*   `user_id`: References the owning user.
+*   `filename`: Original upload file name.
+*   `storage_path`: Internal server path where the file is stored.
+*   `mime_type`: File format classification (JPEG, PNG, PDF).
+*   `size`: File size in bytes.
+*   `tags`: Array of plain tag strings assigned to the file.
+*   `created_at` / `updated_at`: Upload and modification timestamps.
 
 ### 🗓️ Calendar Events
-Stores event reminders and scheduled tasks[cite: 1].
-*   **event_id:** Unique identifier for the event[cite: 1].
-*   **user_id:** References the owning user[cite: 1].
-*   **title:** Event title[cite: 1].
-*   **description:** Detailed plaintext notes about the event[cite: 1].
-*   **start_time / end_time:** Datetime objects for scheduling[cite: 1].
-*   **reminders:** Array of lead times (in minutes) for notification triggers[cite: 1].
-*   **tags:** Array of plain tag strings assigned to the event[cite: 1].
-*   **created_at / updated_at:** Creation and edit timestamps[cite: 1].
+Stores event reminders and scheduled tasks.
+*   `event_id`: Unique identifier for the event.
+*   `user_id`: References the owning user.
+*   `title`: Event title.
+*   `description`: Detailed plaintext notes about the event.
+*   `start_time` / `end_time`: Datetime objects for scheduling.
+*   `reminders`: Array of lead times (in minutes) for notification triggers.
+*   `tags`: Array of plain tag strings assigned to the event.
+*   `created_at` / `updated_at`: Creation and edit timestamps.
 
 ### 🧪 Forms
-Stores self-testing quizzes and data collection forms[cite: 1].
-*   **form_id:** Unique identifier for the form template[cite: 1].
-*   **user_id:** References the owning user[cite: 1].
-*   **title:** Form title[cite: 1].
-*   **fields:** Structured array defining questions, input types, and correct answers[cite: 1].
-*   **tags:** Array of plain tag strings assigned to the form[cite: 1].
-*   **created_at / updated_at:** Creation and modification timestamps[cite: 1].
+Stores self-testing quizzes and data collection forms.
+*   `form_id`: Unique identifier for the form template.
+*   `user_id`: References the owning user.
+*   `title`: Form title.
+*   `fields`: Structured array defining questions, input types, and correct answers.
+*   `tags`: Array of plain tag strings assigned to the form.
+*   `created_at` / `updated_at`: Creation and modification timestamps.
 
 ### 📊 Form Responses
-Maintains user submission attempts decoupled from parent forms to prevent document bloat[cite: 1].
-*   **response_id:** Unique identifier for the submission[cite: 1].
-*   **form_id:** References the parent Form document[cite: 1].
-*   **user_id:** References the user who completed the form[cite: 1].
-*   **answers:** Object or array holding the submitted responses[cite: 1].
-*   **score / result:** Calculated completion percentage or test result[cite: 1].
-*   **submitted_at:** Submission timestamp[cite: 1].
+Maintains user submission attempts decoupled from parent forms to prevent document bloat.
+*   `response_id`: Unique identifier for the submission.
+*   `form_id`: References the parent Form document.
+*   `user_id`: References the user who completed the form.
+*   `answers`: Object or array holding the submitted responses.
+*   `score` / `result`: Calculated completion percentage or test result.
+*   `submitted_at`: Submission timestamp.
 
 ### 🔗 Links
-Stores explicitly connected cross-widget relations[cite: 1].
-*   **link_id:** Unique identifier for the relation entry[cite: 1].
-*   **user_id:** References the owning user account[cite: 1].
-*   **item_a_id / item_a_type:** ID and collection type for the first connected item[cite: 1].
-*   **item_b_id / item_b_type:** ID and collection type for the second connected item[cite: 1].
-*   **created_at:** Timestamp when the link was created[cite: 1].
+Stores explicitly connected cross-widget relations.
+*   `link_id`: Unique identifier for the relation entry.
+*   `user_id`: References the owning user account.
+*   `item_a_id` / `item_a_type`: ID and collection type for the first connected item.
+*   `item_b_id` / `item_b_type`: ID and collection type for the second connected item.
+*   `created_at`: Timestamp when the link was created.
+
 Samuel Svoboda IT3 SŠPU
