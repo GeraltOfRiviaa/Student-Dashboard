@@ -283,7 +283,7 @@ Lives on the dashboard and represents a saved layout space and filter view.
 *   `user_id`: References the owning user account.
 *   `title`: Custom display label set by the user.
 *   `type`: Fixed widget type (note, archive, calendar, or form).
-*   `filter_tags`: Array of plain tag strings used to query items onto the container.
+*   `filter_tags`: Array of tag ObjectIDs used to query items onto the container.
 *   `layout`: Object containing position and sizing parameters { x, y, w, h }.
 *   `created_at` / `updated_at`: Creation and last-modified timestamps.
 
@@ -301,7 +301,7 @@ Stores markdown documents edited directly within the dashboard.
 *   `user_id`: References the owning user.
 *   `title`: Plaintext note title.
 *   `content`: Raw Markdown text body.
-*   `tags`: Array of plain tag strings assigned to the note.
+*   `tags`: Array of tag ObjectIDs assigned to the note.
 *   `created_at` / `updated_at`: Creation and edit timestamps.
 
 ### 🗂️ Archive
@@ -312,7 +312,7 @@ Tracks uploaded files and metadata.
 *   `storage_path`: Internal server path where the file is stored.
 *   `mime_type`: File format classification (JPEG, PNG, PDF).
 *   `size`: File size in bytes.
-*   `tags`: Array of plain tag strings assigned to the file.
+*   `tags`: Array of tag ObjectIDs assigned to the file.
 *   `created_at` / `updated_at`: Upload and modification timestamps.
 
 ### 🗓️ Calendar Events
@@ -323,7 +323,7 @@ Stores event reminders and scheduled tasks.
 *   `description`: Detailed plaintext notes about the event.
 *   `start_time` / `end_time`: Datetime objects for scheduling.
 *   `reminders`: Array of lead times (in minutes) for notification triggers.
-*   `tags`: Array of plain tag strings assigned to the event.
+*   `tags`: Array of tag ObjectIDs assigned to the event.
 *   `created_at` / `updated_at`: Creation and edit timestamps.
 
 ### 🧪 Forms
@@ -332,7 +332,7 @@ Stores self-testing quizzes and data collection forms.
 *   `user_id`: References the owning user.
 *   `title`: Form title.
 *   `fields`: Structured array defining questions, input types, and correct answers.
-*   `tags`: Array of plain tag strings assigned to the form.
+*   `tags`: Array of tag ObjectIDs assigned to the form.
 *   `created_at` / `updated_at`: Creation and modification timestamps.
 
 ### 📊 Form Responses
