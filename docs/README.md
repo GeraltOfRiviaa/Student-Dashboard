@@ -44,7 +44,7 @@ A **modular dashboard web app** where students add predefined widgets (Note, Arc
 ---
 ## Visual Example (not final design)
 > [!NOTE]
-> Everything was done by hand with the use of [shadcn/create Figma community kit]([https://www.example.com](https://www.figma.com/community/file/1342715840824755935/shadcn-ui-components-with-variables-tailwind-classes-updated-september-2026)).
+> Everything was done by hand with the use of [shadcn/create Figma community kit](https://www.figma.com/community/file/1342715840824755935/shadcn-ui-components-with-variables-tailwind-classes-updated-september-2026).
 
 
 <img width="1544" height="1019" alt="Snímek obrazovky 2026-10-06 214552" src="https://github.com/user-attachments/assets/d78c852b-6c93-4948-a190-2a72d95b7063" />
