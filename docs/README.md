@@ -44,13 +44,29 @@ A **modular dashboard web app** where students add predefined widgets (Note, Arc
 ---
 ## Visual Example (not final design)
 > [!NOTE]
-> These mockups were generated with AI to visualize the concept — they are not the final UI design.
+> Everything was done by hand with the use of [shadcn/create Figma community kit]([https://www.example.com](https://www.figma.com/community/file/1342715840824755935/shadcn-ui-components-with-variables-tailwind-classes-updated-september-2026)).
 
-<img width="1200" height="900" alt="dashboard" src="https://github.com/user-attachments/assets/920c3e35-51bd-4c0e-8a7a-961ac8e2edbe" />
+
+<img width="1544" height="1019" alt="Snímek obrazovky 2026-10-06 214552" src="https://github.com/user-attachments/assets/d78c852b-6c93-4948-a190-2a72d95b7063" />
+
 
 ---
 
-<img width="1200" height="900" alt="dashboard_modal" src="https://github.com/user-attachments/assets/0e8cc4e3-694d-4db7-95f3-237ac014711d" />
+<img width="1450" height="1205" alt="Snímek obrazovky 2026-10-06 214524" src="https://github.com/user-attachments/assets/0336aa4c-e6d9-41c8-874a-5109f38ec8a8" />
+
+---
+
+<img width="1411" height="1007" alt="Snímek obrazovky 2026-10-06 214459" src="https://github.com/user-attachments/assets/f8ed3c02-8ba8-4f5d-8516-da6216e9fca2" />
+
+---
+
+<img width="1377" height="1163" alt="Snímek obrazovky 2026-10-06 214451" src="https://github.com/user-attachments/assets/3e329695-6ed4-4c58-a140-8a8ff5681837" />
+
+
+---
+
+<img width="1714" height="1199" alt="Snímek obrazovky 2026-10-06 214440" src="https://github.com/user-attachments/assets/43b0d886-3cd9-4f41-a622-491446eb7330" />
+
 
 ---
 # 🧩 Widgets (Detailed Spec)
