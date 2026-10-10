@@ -1,8 +1,65 @@
 # 🎓 StudyDesk
 
+## Running the project (dev, Docker Compose Watch)
+
+### Prerequisites
+- Docker Desktop (running)
+- Python 3.12+ (only for editor support and generating the JWT secret)
+
+### First-time setup
+1. Clone the repo.
+2. Create the env files from the examples:
+```
+   cp .env.example .env.local
+   cp frontend/.env.example frontend/.env.local
+```
+3. Generate a JWT secret and paste it into `.env.local`:
+```
+   python -c "import secrets; print(secrets.token_hex(32))"
+```
+4. (Optional, for editor autocomplete) create a local venv:
+```
+   cd backend
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+```
+
+### Start
+```
+docker compose -f docker-compose.dev.yml watch
+```
+This builds, starts all services and keeps running in the terminal (stop it with `Ctrl+C`).
+
+Watch handles changes automatically:
+- Edits in `backend/` and `frontend/` are synced into the containers (uvicorn `--reload` and Vite HMR do the live reload).
+- Changes to `backend/requirements.txt` or `frontend/package.json` trigger an automatic rebuild.
+- After changing a Dockerfile or the compose file, stop and run the command again with `up --build --watch` once.
+
+### Stop
+```
+docker compose -f docker-compose.dev.yml down
+```
+Data is kept in the `studydesk` volume. Use `down -v` to delete it.
+
+### Services
+| Service  | URL                                    |
+|----------|----------------------------------------|
+| Frontend | http://localhost:5173                  |
+| API      | http://localhost:8000                  |
+| API docs | http://localhost:8000/docs             |
+| Health   | http://localhost:8000/health           |
+| MongoDB  | `mongodb://localhost:27018` (Compass)  |
+
+### Logs (in a second terminal)
+```
+docker compose -f docker-compose.dev.yml logs -f api
+```
+
+## Update
 
 > [!NOTE]
-> **Updates:** Citations and progress files have been added. Now my work includes user workflow and two simple wireframes. See `citations.md` and `progress.md` in the [docs](/docs) folder.
+> **Where to look:** `citations.md` and `progress.md` in the [docs](/docs) folder.
 
 
 ## Story Time
