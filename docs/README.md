@@ -99,6 +99,7 @@ A **modular dashboard web app** where students add predefined widgets (Note, Arc
 - 👤 User accounts keep personal dashboards and data  
 
 ---
+
 ## Visual Example (not final design)
 > [!NOTE]
 > Everything was done by hand with the use of [shadcn/create Figma community kit](https://www.figma.com/community/file/1342715840824755935/shadcn-ui-components-with-variables-tailwind-classes-updated-september-2026).
