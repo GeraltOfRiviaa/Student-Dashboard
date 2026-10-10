@@ -1,3 +1,8 @@
+# 📅 Progress - 10.10. 2026
+## 🖼️ UX/IU
+So I'm done designing the app for now!!! First version will be quite simple in functionality and its **aesthetics**. Now the target for next update is learning how to work with **Docker** to setup containers for everything and get my backend up an running
+
+
 # 📅 Progress - 6.10. 2026
 ## 🖼️ UX/IU
 I've been sick for a week so much of the work was halted but I still managed to get some work done during the last days of my recovery. In the span of roughly 3 days I've reworked original designs for my table, catalog, calendar views and header. But I also added those variants for tablet and pc. I made the complete workflow for creating, reviewing and taking a test. Menus, login, register, delete and change password windows have been created with also modals for every widget item type + the modal for adding a completely new widget. A taste of my works can be seen in the README, while things that are not there are hidden in the big group of windows you can see in the first picture of UI in readme.
