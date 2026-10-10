@@ -1,4 +1,4 @@
-# 🎓 Student Dashboard App
+# 🎓 StudyDesk
 
 
 > [!NOTE]
